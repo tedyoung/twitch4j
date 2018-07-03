@@ -2,10 +2,10 @@
 plugins {
 	id 'idea'
 	id 'eclipse'
-	id 'net.ltgt.apt' version '0.15'
-	id 'net.ltgt.apt-idea' version '0.15'
+	id 'net.ltgt.apt' version '0.17'
+	id 'net.ltgt.apt-idea' version '0.17'
 	id 'com.jfrog.bintray' version '1.8.1'
-	id 'net.ltgt.apt-eclipse' version '0.15'
+	id 'net.ltgt.apt-eclipse' version '0.17'
 	id 'pl.allegro.tech.build.axion-release' version '1.9.2'
 	id "com.gorylenko.gradle-git-properties" version '1.5.1'
 	id 'io.spring.dependency-management' version '1.0.5.RELEASE'
@@ -127,7 +127,8 @@ subprojects {
 		// - Getter & Setter
 		compileOnly group: 'org.projectlombok', name: 'lombok'
 		annotationProcessor group: 'org.projectlombok', name: 'lombok'
-		testCompile group: 'org.projectlombok', name: 'lombok'
+		compileOnly group: 'org.immutables', name: 'value'
+		annotationProcessor group: 'org.immutables', name: 'value'
 
 		// Jackson
 		compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind'

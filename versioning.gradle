@@ -11,6 +11,7 @@ gitProperties {
 	]
 	dateFormatTimeZone = 'GMT'
 	customProperty 'application.name', rootProject.name
+	customProperty 'application.module', project.name
 	customProperty 'application.version', project.version
 	customProperty 'application.description', project.description
 	customProperty 'application.url', url
