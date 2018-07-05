@@ -12,6 +12,9 @@ plugins {
 }
 
 allprojects {
+	apply plugin: 'net.ltgt.apt'
+	apply plugin: 'net.ltgt.apt-idea'
+	apply plugin: 'net.ltgt.apt-eclipse'
 	apply plugin: 'io.spring.dependency-management'
 
 	ext {
@@ -105,16 +108,10 @@ allprojects {
 subprojects {
 	apply plugin: 'java'
 
+	sourceCompatibility = targetCompatibility = 1.8
+
 	apply from: "${rootDir}/test.gradle"
 	apply from: "${rootDir}/deploy.gradle"
-
-	sourceSets {
-		main {
-			java {
-				srcDirs = ['src/main/java']
-			}
-		}
-	}
 
 	// Dependencies
 	dependencies {
