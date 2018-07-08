@@ -37,6 +37,7 @@ Add it to your build.gradle with:
 ```groovy
 repositories {
 	jcenter()
+	maven { url 'https://jitpack.io/' }
 }
 ```
 and: (latest, you should use the actual version here)
@@ -54,6 +55,10 @@ Add it to your pom.xml with:
     <repository>
       <id>jcenter</id>
       <url>https://jcenter.bintray.com/</url>
+    </repository>
+    <repository>
+      <id>jitpack</id>
+      <url>https://jitpack.io/</url>
     </repository>
 </repositories>
 ```
