@@ -1,20 +1,23 @@
 import java.text.SimpleDateFormat
-import java.time.Instant
 
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
 apply from: "${rootDir}/versioning.gradle"
 
+ext {
+	projectName = rootProject.name == project.name ? "${rootProject.name}-${project.name}" : rootProject.name
+}
 
 /**
  * Javadoc
  */
 javadoc {
 	options {
+		addBooleanOption('html5', true)
 		overview = new File("${rootDir}/src/javadoc/overview.html")
-		title = "Twitch 4 Java - ${project.name} (${project.version})"
-		windowTitle = "${project.name} (${project.version})"
+		title = "Twitch 4 Java - ${projectName} (${project.version})"
+		windowTitle = "${projectName} (${project.version})"
 		stylesheetFile = new File("${rootDir}/src/javadoc/css/style.css")
 		encoding = "UTF-8"
 	}
@@ -44,14 +47,14 @@ jar {
  */
 task sourcesJar(type: Jar, dependsOn: classes, description: 'Builds the sourcesJar.', group: 'build') {
 	from sourceSets.main.allSource
-	baseName = baseName.toLowerCase()
+	baseName = projectName.toLowerCase()
 	classifier = 'sources'
 }
 
 // build a jar with javadoc
 task javadocJar(type: Jar, dependsOn: javadoc, description: 'Builds the javadocJar.', group: 'build') {
 	classifier = 'javadoc'
-	baseName = baseName.toLowerCase()
+	baseName = projectName.toLowerCase()
 	from javadoc.destinationDir
 }
 
@@ -73,7 +76,7 @@ publishing {
 			artifact sourcesJar
 			artifact javadocJar
 			groupId project.group
-			artifactId jar.baseName.toLowerCase()
+			artifactId projectName
 			version project.version
 		}
 	}
