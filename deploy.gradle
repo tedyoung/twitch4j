@@ -3,10 +3,8 @@ import java.text.SimpleDateFormat
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
-apply from: "${rootDir}/versioning.gradle"
-
 ext {
-	projectName = rootProject.name == project.name ? "${rootProject.name}-${project.name}" : rootProject.name
+	projectName = !rootProject.name.equalsIgnoreCase(project.name) ? "${rootProject.name}-${project.name}".toLowerCase() : rootProject.name.toLowerCase()
 }
 
 /**
@@ -85,10 +83,12 @@ publishing {
  * Bintray Upload
  */
 bintray {
-	user = System.getenv('BINTRAY_USER')
-	key = System.getenv('BINTRAY_API_KEY')
+	user = findProperty("bintrayUser").toString() ?: System.getenv("BINTRAY_USER")
+	key = findProperty("bintrayApiKey").toString() ?: System.getenv("BINTRAY_API_KEY")
 	publications = ['mainProject']
-	dryRun = false
+	dryRun = false 		// Dry Run without deployment
+	publish = false 	// automatically publish
+	override = false 	// override version artifacts already published
 	pkg {
 		// jcenter repository namespace and name
 		userOrg = 'twitch4j'
