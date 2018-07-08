@@ -52,7 +52,7 @@ public class ChannelEndpoint extends AbstractTwitchEndpoint {
 	/**
 	 * Endpoint: Get Channel
 	 * Gets a specified channel object.
-	 *
+	 * @param channelId Channel ID
 	 * @return todo
 	 */
 	public Channel getChannel(Long channelId) {
@@ -78,7 +78,7 @@ public class ChannelEndpoint extends AbstractTwitchEndpoint {
 	 * Endpoint: Get Channel
 	 * Get Channel returns more data than Get Channel by ID because Get Channel is privileged.
 	 * Requires Scope: channel_read
-	 *
+	 * @param credential
 	 * @return todo
 	 */
 	public Channel getChannel(ICredential credential) {
@@ -112,7 +112,7 @@ public class ChannelEndpoint extends AbstractTwitchEndpoint {
 	 * Endpoint: Get Channel Editors
 	 * Gets a list of users who are editors for a specified channel.
 	 * Requires Scope: channel_read
-	 *
+	 * @param credential
 	 * @return todo
 	 */
 	public List<User> getEditors(ICredential credential) {
@@ -142,6 +142,7 @@ public class ChannelEndpoint extends AbstractTwitchEndpoint {
 	 * Gets a list of users who follow a specified channel, sorted by the date when they started following the channel (newest first, unless specified otherwise).
 	 * Requires Scope: none
 	 *
+	 * @param channelId Channel ID
 	 * @param limit     Maximum number of most-recent objects to return (users who started following the channel most recently). Default: 25. Maximum: 100.
 	 * @param cursor    Tells the server where to start fetching the next set of results, in a multi-page response.
 	 * @param direction Direction of sorting. Valid values: asc (oldest first), desc (newest first). Default: desc.
@@ -188,6 +189,7 @@ public class ChannelEndpoint extends AbstractTwitchEndpoint {
 	 * Gets a list of users who follow a specified channel, sorted by the date when they started following the channel (newest first, unless specified otherwise).
 	 * Requires Scope: none
 	 *
+	 * @param channelId Channel ID
 	 * @param limit     Maximum number of most-recent objects to return (users who started following the channel most recently). Default: 25. Maximum: none.
 	 * @param direction Direction of sorting. Valid values: asc (oldest first), desc (newest first). Default: desc.
 	 * @return todo
@@ -201,6 +203,7 @@ public class ChannelEndpoint extends AbstractTwitchEndpoint {
 	 * Gets a list of teams to which a specified channel belongs.
 	 * Requires Scope: none
 	 *
+	 * @param channelId Channel ID
 	 * @return todo
 	 */
 	public List<Team> getTeams(Long channelId) {
@@ -225,6 +228,7 @@ public class ChannelEndpoint extends AbstractTwitchEndpoint {
 	 * This is not related to the user messages, subscriptions are visible immediately.
 	 * Requires Scope: channel_subscriptions
 	 *
+	 * @param credential
 	 * @param limit  Maximum number of most-recent objects to return. Default: 25. Maximum: 100.
 	 * @param offset Object offset for pagination of results. Default: 0.
 	 * @param order  Direction of sorting. Valid values: asc (oldest first), desc (newest first). Default: asc.
@@ -269,8 +273,9 @@ public class ChannelEndpoint extends AbstractTwitchEndpoint {
 	 * Returns a subscription object which includes the user if that user is subscribed. Requires authentication for the channel.
 	 * Requires Scope: channel_check_subscription
 	 *
-	 * @param user todo
-	 * @return todo
+	 * @param credential	Channel credential
+	 * @param user 			Subscribed user
+	 * @return {@link Optional} subscription. If exists user subscribe channel authorized via {@link ICredential}
 	 */
 	public Optional<Subscription> getSubscriptionByUser(ICredential credential, @Nonnull User user) {
 		// Validate Arguments
@@ -300,12 +305,13 @@ public class ChannelEndpoint extends AbstractTwitchEndpoint {
 	 * Gets a list of videos from a specified channel.
 	 * Requires Scope: none
 	 *
+	 * @param channelId  	Channel ID
 	 * @param limit         Maximum number of most-recent objects to return. Default: 25. Maximum: 100.
 	 * @param offset        Object offset for pagination of results. Default: 0.
 	 * @param sort          Sorting order of the returned objects. Valid values: views, time. Default: time (most recent first).
 	 * @param language      Constrains the language of the videos that are returned; for example, *en,es.* Default: all languages.
 	 * @param broadcastType Constrains the type of videos returned. Valid values: (any combination of) archive, highlight, upload, Default: highlight.
-	 * @return todo
+	 * @return List all channel videos
 	 */
 	public List<Video> getVideos(Long channelId, @Nullable Integer limit, @Nullable Integer offset, @Nullable VideoSort sort, @Nullable List<Locale> language, @Nullable BroadcastType broadcastType) {
 		// Endpoint
@@ -350,7 +356,8 @@ public class ChannelEndpoint extends AbstractTwitchEndpoint {
 	 * Valid values are 30, 60, 90, 120, 150, and 180.
 	 * Requires Scope: channel_commercial
 	 *
-	 * @param commercialType todo
+	 * @param credential 		todo
+	 * @param commercialType 	Commercial Type
 	 * @return todo
 	 */
 	public Commercial startCommercial(ICredential credential, CommercialType commercialType) {
@@ -383,7 +390,8 @@ public class ChannelEndpoint extends AbstractTwitchEndpoint {
 	 * You will need to update your stream key or you will be unable to stream again.
 	 * Requires Scope: channel_stream
 	 *
-	 * @return todo
+	 * @param credential todo
+	 * @return Stream Key has been reset
 	 */
 	public Boolean deleteStreamKey(ICredential credential) {
 		try {

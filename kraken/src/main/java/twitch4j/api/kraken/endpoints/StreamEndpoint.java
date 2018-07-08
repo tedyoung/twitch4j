@@ -1,6 +1,5 @@
 package twitch4j.api.kraken.endpoints;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -248,7 +247,7 @@ public class StreamEndpoint extends AbstractTwitchEndpoint {
 	 * @param credential OAuthCredential of the user, you want to request recommendations for.
 	 * @return StreamList of random Streams.
 	 */
-	@Unofficial
+	@Unofficial("https://discuss.dev.twitch.tv/t/is-the-recommended-endpoint-available-documented/9994")
 	public List<Recommendation> getRecommendations(ICredential credential) {
 		// Endpoint
 		RestTemplate restTemplate = this.restTemplate;
@@ -269,67 +268,12 @@ public class StreamEndpoint extends AbstractTwitchEndpoint {
 
 	/**
 	 * Get the streams on the frontpage for a specific region (UnofficialEndpoint)
-	 * <table summary="Valid Regions:">
-	 * <tr><th>Code</th><th>Region</th></tr>
-	 * <tr><td>AT</td><td>Austria</td></tr>
-	 * <tr><td>BE</td><td>Belgium</td></tr>
-	 * <tr><td>BG</td><td>Bulgaria</td></tr>
-	 * <tr><td>CY</td><td>Cyprus</td></tr>
-	 * <tr><td>CZ</td><td>Czech Republic</td></tr>
-	 * <tr><td>DE</td><td>Germany</td></tr>
-	 * <tr><td>DK</td><td>Denmark</td></tr>
-	 * <tr><td>EE</td><td>Estonia</td></tr>
-	 * <tr><td>FI</td><td>Finland</td></tr>
-	 * <tr><td>FR</td><td>France</td></tr>
-	 * <tr><td>GR</td><td>Greece</td></tr>
-	 * <tr><td>GL</td><td>Greenland</td></tr>
-	 * <tr><td>HU</td><td>Hungary</td></tr>
-	 * <tr><td>IS</td><td>Iceland</td></tr>
-	 * <tr><td>IT</td><td>Italy</td></tr>
-	 * <tr><td>LT</td><td>Lithuania</td></tr>
-	 * <tr><td>LU</td><td>Luxembourg</td></tr>
-	 * <tr><td>NL</td><td>Netherlands</td></tr>
-	 * <tr><td>NO</td><td>Norway</td></tr>
-	 * <tr><td>PL</td><td>Poland</td></tr>
-	 * <tr><td>PT</td><td>Portugal</td></tr>
-	 * <tr><td>RO</td><td>Romania</td></tr>
-	 * <tr><td>RU</td><td>Russia</td></tr>
-	 * <tr><td>SK</td><td>Slovakia</td></tr>
-	 * <tr><td>SI</td><td>Slovenia</td></tr>
-	 * <tr><td>ES</td><td>Spain</td></tr>
-	 * <tr><td>SE</td><td>Sweden</td></tr>
-	 * <tr><td>CH</td><td>Switzerland</td></tr>
-	 * <tr><td>TR</td><td>Turkey</td></tr>
-	 * <tr><td>LV</td><td>Latvia</td></tr>
-	 * <tr><td>MT</td><td>Malta</td></tr>
-	 * <tr><td>RS</td><td>Serbia</td></tr>
-	 * <tr><td>AL</td><td>Albania</td></tr>
-	 * <tr><td>AD</td><td>Andorra</td></tr>
-	 * <tr><td>AM</td><td>Armenia</td></tr>
-	 * <tr><td>AZ</td><td>Azerbaijan</td></tr>
-	 * <tr><td>BY</td><td>Belarus</td></tr>
-	 * <tr><td>BA</td><td>Bosnia and Herzegovina</td></tr>
-	 * <tr><td>HR</td><td>Croatia</td></tr>
-	 * <tr><td>GE</td><td>Georgia</td></tr>
-	 * <tr><td>IL</td><td>Israel</td></tr>
-	 * <tr><td>LI</td><td>Liechtenstein</td></tr>
-	 * <tr><td>MK</td><td>Macedonia</td></tr>
-	 * <tr><td>MD</td><td>Moldova</td></tr>
-	 * <tr><td>MC</td><td>Monaco</td></tr>
-	 * <tr><td>ME</td><td>Montenegro</td></tr>
-	 * <tr><td>QA</td><td>Qatar</td></tr>
-	 * <tr><td>SM</td><td>San Marino</td></tr>
-	 * <tr><td>UA</td><td>Ukraine</td></tr>
-	 * <tr><td>UK</td><td>United Kingdom</td></tr>
-	 * <tr><td>GB</td><td>Great Britain</td></tr>
-	 * <tr><td>IE</td><td>Ireland</td></tr>
-	 * <tr><td>US</td><td>USA</td></tr>
-	 * </table>
 	 *
-	 * @param locale using {@link Optional} Valid Code Regions below
+	 * @param locale 	The Language
+	 * @param limit 	Limit
 	 * @return The 6 streams of the frontpage for the specified region.
 	 */
-	@Unofficial
+	@Unofficial("https://github.com/justintv/Twitch-API/blob/9991b5673734916ad8f06a5b6843e0da4b68ed9f/v3_resources/streams.md#get-streamsfeatured")
 	public List<StreamFeatured> getStreamsOnFrontpage(@Nullable Locale locale, @Nullable Integer limit) {
 		// Endpoint
 		String requestUrl = String.format("https://api.twitch.tv/kraken/streams/featured");
@@ -386,13 +330,11 @@ public class StreamEndpoint extends AbstractTwitchEndpoint {
 	 * This method check's if the stream is on the frontpage for a certain region.
 	 *
 	 * @param stream Stream object
+	 * @deprecated Unsupported. Will return <code>false</code>
 	 * @return Whether a stream is on the frontpage.
 	 */
-	@Unofficial
+	@Deprecated
 	public Boolean isStreamOnFrontpage(Stream stream) {
-		List<String> regions = Arrays.asList("", "");
-
-
 		return false;
 	}
 }

@@ -24,7 +24,7 @@ public class EditorImpl implements IEditor {
 	}
 
 	/**
-	 * @param channel
+	 * @param channel channel name
 	 * @see <a href="https://help.twitch.tv/customer/portal/articles/2877820">Raids</a>
 	 */
 	@Override

@@ -96,6 +96,7 @@ public class CommunityEndpoint extends AbstractTwitchEndpoint {
 	 * @param description Long description of the community, shown in the *about this community* box. Markdown syntax allowed. Maximum 1,572,864 characters (1.5 MB).
 	 * @param rules       Rules displayed when viewing a community page or searching for a community from the broadcaster dashboard. Markdown syntax allowed. Maximum 1,572,864 characters (1.5 MB)
 	 * @param email       Email address of the community owner.
+	 * @return returns updated community successful
 	 */
 	public Boolean updateCommunity(ICredential credential, String id, @Nullable String summary, @Nullable String description, @Nullable String rules, @Nullable String email) {
 		// Endpoint

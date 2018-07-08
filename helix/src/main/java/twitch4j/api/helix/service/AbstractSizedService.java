@@ -15,6 +15,7 @@ public abstract class AbstractSizedService<T> extends AbstractService<T> {
 	/**
 	 * Limit data for pagination.
 	 * @param size <b>Max:</b> 100,<br> <b>Default:</b> 20
+	 * @param <S> continuous this classes
 	 * @return
 	 */
 	public <S extends AbstractSizedService<T>> S size(int size) {

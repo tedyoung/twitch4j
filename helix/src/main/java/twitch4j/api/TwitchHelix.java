@@ -32,6 +32,7 @@ public class TwitchHelix {
 
 	/**
 	 * Initialize the TwitchHelix Endpoints
+	 * @param configuration configuration
 	 */
 	public TwitchHelix(Configuration configuration) {
 		Map<String, String> headers = new LinkedHashMap<>();
@@ -52,6 +53,7 @@ public class TwitchHelix {
 	 * The Bits Service
 	 *
 	 * Required Permissions: {@link twitch4j.common.auth.Scope#BITS_READ}
+	 * @param credential
 	 * @return A new instance of the BitsService
 	 */
 	public BitsService getBitsLeaderboad(ICredential credential) {
@@ -74,6 +76,7 @@ public class TwitchHelix {
 	 * The ClipsCreation Service
 	 *
 	 * Required Permissions: {@link twitch4j.common.auth.Scope#CLIPS_EDIT}
+	 * @param credential
 	 * @return A new instance of the ClipsCreationService
 	 */
 	public ClipsCreationService createClip(ICredential credential) {
@@ -123,6 +126,7 @@ public class TwitchHelix {
 	 * The Users Service
 	 *
 	 * Required Permissions: {@link twitch4j.common.auth.Scope#USER_READ}
+	 * @param credential
 	 * @return A new instance of the UsersService
 	 */
 	public UsersService getUsersService(@Nullable ICredential credential) {

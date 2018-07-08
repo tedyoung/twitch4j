@@ -60,9 +60,13 @@ public class VideoEndpoint extends AbstractTwitchEndpoint {
 	 * Gets the top videos based on viewcount, optionally filtered by game or time period.
 	 * Requires Scope: none
 	 *
+	 * @param limit 		Limit
+	 * @param offset 		Offset
 	 * @param game          Constrains videos by game. A game name can be retrieved using the Search Games endpoint.
-	 * @param period        Specifies the window of time to search. Valid values: week, month, all. Default: week
-	 * @param broadcastType Constrains the type of videos returned. Valid values: (any combination of) archive, highlight, upload, Default: highlight. (comma-separated list)
+	 * @param period        Specifies the window of time to search.
+	 * @param broadcastType Constrains the type of videos returned.
+	 * @param language 		Language List
+	 * @param sort    		Video Sorting
 	 * @return Returns all top videos matching the query parameters.
 	 */
 	public List<Video> getTopVideos(@Nullable Integer limit, @Nullable Integer offset, @Nullable Game game, @Nullable VideoPeriod period, @Nullable BroadcastType broadcastType, @Nullable List<Locale> language, @Nullable VideoSort sort) {
@@ -108,9 +112,13 @@ public class VideoEndpoint extends AbstractTwitchEndpoint {
 	 * Gets the videos from channels the user is following based on the OAuth token provided.
 	 * Requires Scope: user_read
 	 *
-	 * @param credential    The user.
-	 * @param broadcastType Constrains the type of videos returned. Valid values: (any combination of) archive, highlight, upload, Default: highlight. (comma-separated list)
-	 * @return Gets the videos from channels the user is following based on the OAuth token provided.
+	 * @param credential    User credential.
+	 * @param limit 		Limit
+	 * @param offset 		Offset
+	 * @param broadcastType Constrains the type of videos returned.
+	 * @param language 		List of Languages
+	 * @param sort 			Video Sort
+	 * @return List of videos via authorized user by {@link ICredential}
 	 */
 	public List<Video> getFollowedVideos(ICredential credential, @Nullable Integer limit, @Nullable Integer offset, @Nullable BroadcastType broadcastType, @Nullable List<Locale> language, @Nullable VideoSort sort) {
 		try {
