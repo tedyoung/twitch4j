@@ -44,7 +44,7 @@ and: (latest, you should use the actual version here)
 
 ```groovy
 dependencies {
-    compile 'com.github.twitch4j:twitch4j:v1.0.0-alpha'
+    compile 'com.github.twitch4j:twitch4j-core:1.0.0-alpha'
 }
 ```
 
@@ -67,8 +67,8 @@ and: (latest, you should use the actual version here)
 ```xml
 <dependency>
     <groupId>com.github.twitch4j</groupId>
-    <artifactId>twitch4j</artifactId>
-    <version>v1.0.0-alpha</version>
+    <artifactId>twitch4j-core</artifactId>
+    <version>1.0.0-alpha</version>
 </dependency>
 ```
 
