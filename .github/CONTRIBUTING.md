@@ -48,10 +48,62 @@ Before starting configuration this IDE we need [download IDE](https://www.jetbra
 	* Press **OK**
 	
 #### Eclipse
-	Soon
-#### Netbeans
-	Soon
+[Eclipse](https://www.eclipse.org) is another choice for advancements programming and old known IDE before IntelliJ.
+Before starting configuration this IDE we need [download IDE](https://www.eclipse.org/downloads/) and install [Lombok](https://projectlombok.org/) using [this installer](https://projectlombok.org/download).
 
+* After [installation Eclipse](https://wiki.eclipse.org/Eclipse/Installation), try install a [Project Lombok](https://projectlombok.org/) using a [installer](https://projectlombok.org/download)
+	
+	Follow the instructions on the screen. Add JVM args into `eclipse.ini` (this file is in installed source directory) file if you have possibilities. If it is exist you can proceed to next step, when it is a importing our project.
+	Sometimes it is not necessarily because Lombok installer adding them into the `eclipse.ini` file. It's up to you.
+	```
+	-vmargs -javaagent:lombok.jar
+	```
+
+* Import project using link for git project. 
+	
+	For this step we needed make sure if we have booth extensions required for working of this project.
+	- [EGit - Git Integration for Eclipse](https://marketplace.eclipse.org/content/egit-git-integration-eclipse)
+	- [Buildship Gradle Integration](https://marketplace.eclipse.org/content/buildship-gradle-integration)
+	
+	If IDE have it implemented in installation we can proceed to the steps below:
+	
+	- Go to **File** > **Import**  and  select > **Git** > **Projects from Git**.
+	- Press **Next >** and select **Clone URI** with pressing **Next >**.
+	- Paste your link in **URI** field and press **Next >**.
+	- Select specific branches what you need to work with them and press **Next >**.
+	- To start cloning repository specify **Directory**, **Initial branch** (recommending select `develop` branch) and **Remote name**. I think you need change only directory because of rest is find and we will leave this.
+	- Final step is select **Import as general project**. If we trying use **Import using the New Project wizard**, Gradle extension will not allow us to import, only creation.
+	- That's all of them. Import as new **general** project and press **Finish** to start.
+	- On the *right side* ide you will find a distinctive a Gradle elephant logo. Click him to expand **Gradle Task View** tab. You will find this message `There are no Gradl;e projects in the current workspace. Import a Gradle project to see its tasks in the Gradle Task View`. Click to **Import a Gradle Project**
+	- Specify a **Project root directory** if this field is empty. Sometimes we need specify a Working sets. Create them one using **New** button, and choose **Resource**. Before finishing and selecting our project we must naming a **Working set name**. Than click **Finish**.
+	
+* Final step is activate **Annotation Processing**
+
+	- Right click on the project and select Properties.
+    - Open **Java Compiler** > **Annotation Processing**. Check **Enable annotation processing**.
+	- Change sources directory to:
+		* **Generated source directory**: `build\generated\source\apt\main`
+		* **Generated test source directory**: `build\generated\source\apt\test`
+	- Confirm changes pressing **Apply and Close**
+	
+#### Netbeans
+[NetBeans](https://www.eclipse.org) IDE is a free and open source integrated development environment for application development on Windows, Mac, Linux, and Solaris operating systems. The IDE simplifies the development of web, enterprise, desktop, and mobile applications that use the Java and HTML5 platforms. The IDE also offers support for the development of PHP and C/C++ applications. Project is associate by Oracle Corporation.
+
+To get started we need first a [Gradle Support](http://plugins.netbeans.org/plugin/44510/gradle-support) plugin and Downloaded [Project Lombok](https://projectlombok.org/download) jar package.
+
+* Before start install [Gradle Support](http://plugins.netbeans.org/plugin/44510/gradle-support) plugin first. 
+	
+	You can use in menu **Tools** > **Plugins**. In **Available Plugins** tab type `Gradle Support` in search field. Mark them and click **Install**. Shows Installer window, accept a licensing conditions to continue installations. 
+
+* Now it's time to import our project.
+
+	- Go to **Team** > **Git** > **Clone**
+	- Paste your link into **Repository URL** field and press **Next >**. Of course before that you can specified Destination Folder for cloning our project.
+	- Choose branches for listening. If you want it. Very important!!! You need listen a `develop` branch because we are pushing there before pushing into `master` branch and create Release.
+	- In next step select **Checkout Branch** to `develop`, and click **Finish**
+	- After cloned project will show information alert when asking us when we want open this project. We will do pressing **Open Project**
+	
+Now IDE will automatically finds a Gradle project and will execute tasks for preparing project to start coding. No configuration of Annotation processing, no more adding Lombok plugins stuffs like. Everything is on the Gradle Plugin.
 
 ## How to contribute to Twitch4J
 Of course you can contribute to our repository in 3 ways:
