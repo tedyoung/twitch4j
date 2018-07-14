@@ -1,6 +1,6 @@
 Thank you for considering to help us on this project. This guidelines presents: 
-* **How to configure your IDE**
-* **How to contribute to Twitch4J**
+* **[How to configure your IDE](#how-to-configure-your-ide)**
+* **[How to contribute to Twitch4J](#how-to-contribute-to-twitch4j)**
 
 ## How to configure your IDE
 Configuring IDE is important to starting contribute. We do like preferred use [IntelliJ IDEA](https://www.jetbrains.com/idea/). 
