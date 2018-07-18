@@ -40,7 +40,7 @@ public enum Scope {
 	/**
 	 * Read whether a user is subscribed to your channel.
 	 */
-	channel_check_subscription,
+	CHANNEL_CHECK_SUBSCRIPTION,
 	/**
 	 * Trigger commercials on channel.
 	 */
@@ -49,14 +49,6 @@ public enum Scope {
 	 * Write channel metadata (game, status, etc).
 	 */
 	CHANNEL_EDITOR,
-	/**
-	 * Add posts and reactions to a channel feed.
-	 */
-	CHANNEL_FEED_EDIT,
-	/**
-	 * View a channel feed.
-	 */
-	CHANNEL_FEED_READ,
 	/**
 	 * Read nonpublic channel information, including email address and stream key.
 	 */
