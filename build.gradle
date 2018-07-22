@@ -2,20 +2,30 @@
 plugins {
 	id 'idea'
 	id 'eclipse'
-	id 'net.ltgt.apt' version '0.15'
-	id 'net.ltgt.apt-idea' version '0.15'
-	id 'com.jfrog.bintray' version '1.8.1'
-	id 'net.ltgt.apt-eclipse' version '0.15'
+	id 'net.ltgt.apt' version '0.17'
+	id 'net.ltgt.apt-idea' version '0.17'
+	id 'com.jfrog.bintray' version '1.8.4'
+	id 'net.ltgt.apt-eclipse' version '0.17'
+	id "com.gorylenko.gradle-git-properties" version '1.5.1'
 	id 'io.spring.dependency-management' version '1.0.5.RELEASE'
 }
 
 allprojects {
+	apply plugin: 'net.ltgt.apt'
+	apply plugin: 'net.ltgt.apt-idea'
+	apply plugin: 'net.ltgt.apt-eclipse'
 	apply plugin: 'io.spring.dependency-management'
+
+	ext {
+		projectUrl = 'https://github.com/twitch4j/twitch4j'
+		gitUrl = 'https://github.com/twitch4j/twitch4j.git'
+		url = projectUrl
+	}
 
 	dependencyManagement {
 		// BOMs
 		imports {
-			mavenBom 'com.fasterxml.jackson:jackson-bom:2.9.5'
+			mavenBom 'com.fasterxml.jackson:jackson-bom:2.9.6'
 			mavenBom 'io.projectreactor:reactor-bom:Bismuth-SR10'
 			mavenBom 'org.springframework:spring-framework-bom:5.0.6.RELEASE'
 		}
@@ -75,27 +85,20 @@ allprojects {
 	// Artifact Info
 	group = 'com.github.twitch4j'
 	description = 'This is a api client for the Twitch API V5/IRC/PubSub. (And related services: Streamlabs, ...)'
-	version = (System.getenv().containsKey("TRAVIS_TAG")) ? System.getenv("TRAVIS_TAG") : "v0.11.0-SNAPSHOT"
+	version = "1.0.0-SNAPSHOT"
 
-	configurations.all {
-		// Disable Gradle Caching
-		resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
-	}
+	//
+	bintrayUpload.enabled = (project.name != rootProject.name)
 }
 
 subprojects {
 	apply plugin: 'java'
+	apply plugin: 'com.gorylenko.gradle-git-properties'
+
+	sourceCompatibility = targetCompatibility = 1.8
 
 	apply from: "${rootDir}/test.gradle"
 	apply from: "${rootDir}/deploy.gradle"
-
-	sourceSets {
-		main {
-			java {
-				srcDirs = ['src/main/java']
-			}
-		}
-	}
 
 	// Dependencies
 	dependencies {
@@ -108,7 +111,8 @@ subprojects {
 		// - Getter & Setter
 		compileOnly group: 'org.projectlombok', name: 'lombok'
 		annotationProcessor group: 'org.projectlombok', name: 'lombok'
-		testCompile group: 'org.projectlombok', name: 'lombok'
+		compileOnly group: 'org.immutables', name: 'value'
+		annotationProcessor group: 'org.immutables', name: 'value'
 
 		// Jackson
 		compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind'
@@ -120,6 +124,24 @@ subprojects {
 		testCompile group: 'org.mockito', name: 'mockito-core'
 		testCompile group: 'ch.qos.logback', name: 'logback-classic'
 	}
+
+
+	gitProperties {
+		keys = [
+				'git.commit.id',
+				'git.commit.id.abbrev',
+				'git.closest.tag.name',
+				'git.closest.tag.commit.count',
+				'git.commit.id.describe'
+		]
+		dateFormatTimeZone = 'GMT'
+		customProperty 'application.name', rootProject.name
+		customProperty 'application.module', project.name
+		customProperty 'application.version', project.version
+		customProperty 'application.description', project.description
+		customProperty 'application.url', url
+	}
+
 }
 
 wrapper {

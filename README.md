@@ -37,13 +37,14 @@ Add it to your build.gradle with:
 ```groovy
 repositories {
 	jcenter()
+	maven { url 'https://jitpack.io/' }
 }
 ```
 and: (latest, you should use the actual version here)
 
 ```groovy
 dependencies {
-    compile 'com.github.twitch4j:twitch4j:+'
+    compile 'com.github.twitch4j:twitch4j-core:1.0.0-alpha'
 }
 ```
 
@@ -55,6 +56,10 @@ Add it to your pom.xml with:
       <id>jcenter</id>
       <url>https://jcenter.bintray.com/</url>
     </repository>
+    <repository>
+      <id>jitpack</id>
+      <url>https://jitpack.io/</url>
+    </repository>
 </repositories>
 ```
 and: (latest, you should use the actual version here)
@@ -62,84 +67,18 @@ and: (latest, you should use the actual version here)
 ```xml
 <dependency>
     <groupId>com.github.twitch4j</groupId>
-    <artifactId>twitch4j</artifactId>
-    <version>RELEASE</version>
+    <artifactId>twitch4j-core</artifactId>
+    <version>1.0.0-alpha</version>
 </dependency>
 ```
 
 --------
 
 ## Features
-#### OAuth Authentication
- - [x] Twitch
- - [x] StreamLabs
- 
-#### Twitch REST Endpoints
- - [ ] Bits
- - [x] Channel Feed
- - [x] Channels
- - [x] Chat
- - [ ] Clips
- - [ ] Collections
- - [x] Communities (Released: 10.02.2017)
- - [x] Games
- - [x] Ingests
- - [x] Search
- - [x] Streams
- - [x] Teams
- - [x] Users
- - [x] Videos
-
-#### Twitch PubSub
- - [x] Bits
- - [x] Commerce
- - [x] Whispers
- - [x] Subscriptions
- - [x] Follows - *Unofficial*
- - [x] Extension Broadcast System - *Unofficial*
- - [x] Stream Status (Video Playback) - *Unofficial*
- - [x] Moderation Action (from specified moderator in specified channel) - *Unofficial*
- 
-#### Twitch IRC (WebSocket)
- - [ ] Raids
- - [ ] Rituals
- - [ ] Chat Rooms
- - [ ] Subscriptions
- - [ ] Cheers (Bits)
- - [ ] `/me` interactions chat
- - [ ] `/color` changer
- - [ ] [Moderation](https://help.twitch.tv/customer/portal/articles/659095-chat-moderation-commands)
-   - [ ] Ban (with reason)
-   - [ ] Timeout (with reason)
-   - [ ] Slow mode
-   - [ ] Sub mode
-   - [ ] Follow mode
-   - [ ] R9K mode
-   - [ ] Emote Only mode
- - [ ] Channel Editor
-   - [ ] Commercial
-   - [ ] Host mode
-
-#### 3rd Party
-##### [Streamlabs](https://streamlabs.com/)
- - [x] Users (Read)
- - [x] Donations (Read, Create)
- - [x] Custom Alerts (Create)
- 
-##### [StreamTip](http://streamtip.com/)
- - Planned
-
-##### [GameWisp](https://gamewisp.com/)
- - Planned
- 
-##### [StreamPro](https://streampro.io/)
-  - No API
-
-##### [Muxy.IO](https://muxy.io/)
-  - No API
+All features has been moved into [issue](https://github.com/twitch4j/twitch4j/issues/46)
 
 ## Getting Started
-Just some simple examples, visit the [WIKI](https://github.com/PhilippHeuer/twitch4j/wiki) for more details.
+Just some simple examples, visit the [WIKI](https://github.com/twitch4j/twitch4j/wiki) for more details.
 
 ### Sample Projects using Twitch4J
  - [CLI: Chatbot - Twitch4J](https://github.com/twitch4j/twitch4j-chatbot) by @twitch4j

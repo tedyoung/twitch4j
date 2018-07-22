@@ -37,6 +37,7 @@ public class RestClient {
 	 * Adds a interceptor to the Rest Template.
 	 *
 	 * @param interceptor Interceptor, that will be executed prior to the http request.
+	 * @return continuously this class
 	 * @see HeaderRequestInterceptor
 	 */
 	public RestClient addInterceptor(ClientHttpRequestInterceptor interceptor) {
@@ -47,6 +48,7 @@ public class RestClient {
 	/**
 	 * Gets a Rest Template.
 	 *
+	 * @param mapper Jackson's {@link ObjectMapper}
 	 * @return A RestTemplate for http requests.
 	 */
 	public RestTemplate getRestTemplate(ObjectMapper mapper) {
@@ -61,6 +63,7 @@ public class RestClient {
 	/**
 	 * Gets a Rest Template without any interceptors.
 	 *
+	 * @param mapper Jackson's {@link ObjectMapper}
 	 * @return A RestTemplate for http requests.
 	 */
 	public RestTemplate getPlainRestTemplate(ObjectMapper mapper) {

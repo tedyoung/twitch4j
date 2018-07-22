@@ -27,6 +27,8 @@ public class GameEndpoint extends AbstractTwitchEndpoint {
 	 * Get games by number of current viewers on Twitch.
 	 * Requires Scope: none
 	 *
+	 * @param limit todo
+	 * @param offset todo
 	 * @return todo
 	 */
 	public List<TopGame> getTopGames(@Nullable Integer limit, @Nullable Integer offset) {

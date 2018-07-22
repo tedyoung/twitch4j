@@ -35,7 +35,7 @@ public class ChatEndpoint extends AbstractTwitchEndpoint {
 	 * However, if you're only a viewer of that channel, you'll only get the rooms that you can see (not sub only, etc.).
 	 *
 	 * @param channelId The channel ID that you're trying to get the chat rooms for.
-	 * @return
+	 * @return List of Chat Rooms
 	 */
 	public List<ChatRoom> getChatRooms(Long channelId) {
 		// Validate Arguments

@@ -12,6 +12,7 @@ import twitch4j.common.auth.AuthService;
 import twitch4j.common.auth.CredentialManager;
 import twitch4j.common.auth.ICredential;
 import twitch4j.common.auth.storage.AuthStorage;
+import twitch4j.common.utils.CommonUtils;
 import twitch4j.irc.MessageInterfaceAPI;
 import twitch4j.irc.TwitchMessageInterface;
 import twitch4j.pubsub.PubSubTopic;
@@ -19,7 +20,6 @@ import twitch4j.pubsub.TwitchPubSub;
 
 @Getter
 public class TwitchClient {
-
 	private final TwitchKraken krakenEndpoint;
 	private final TwitchHelix helixEndpoint;
 	private final CredentialManager credentialManager;
@@ -31,7 +31,7 @@ public class TwitchClient {
 		helixEndpoint = new TwitchHelix(configuration);
 		credentialManager = new CredentialManager(service, storage);
 		messageInterface = new TwitchMessageInterface(configuration, eventManager, tmiApi);
-		pubSub = new TwitchPubSub(eventManager, Configuration.getMapper());
+		pubSub = new TwitchPubSub(eventManager, CommonUtils.getMapper());
 	}
 
 	public static Builder builder() {
@@ -81,7 +81,6 @@ public class TwitchClient {
 		default Builder addChannels(String... channels) {
 			return addChannels(Arrays.asList(channels));
 		}
-
 
 		TwitchClient build();
 

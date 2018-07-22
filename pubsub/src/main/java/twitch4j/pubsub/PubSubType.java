@@ -29,7 +29,7 @@ public enum PubSubType {
 	 * Anyone follow on a specified channel.
 	 * <code>subject(&lt;channel ID&gt;)</code>
 	 */
-	@Unofficial
+	@Unofficial("") // TODO: Required Source
 	FOLLOW("following"),
 
 	/**
@@ -37,14 +37,14 @@ public enum PubSubType {
 	 * Owner ID must be a moderator in specific channel.
 	 * <code>subject(&lt;owner ID&gt;, &lt;channel ID&gt;)</code>
 	 */
-	@Unofficial
+	@Unofficial("https://discuss.dev.twitch.tv/t/in-line-broadcaster-chat-mod-logs/7281")
 	CHAT_MODERATION_ACTIONS("chat_moderator_actions"),
 
 	/**
 	 * Listens EBS broadcast sent to specific extension on a specific channel
 	 * <code>subject(&lt;channel ID&gt;, &lt;extension ID&gt;)</code>
 	 */
-	@Unofficial
+	@Unofficial("https://discuss.dev.twitch.tv/t/private-topic-for-extension-events-in-pubsub/15628/3")
 	CHANNEL_EXTENSION_BROADCAST("channel-ext-v1") {
 		@Override
 		public String subject(String... subject) {
@@ -62,7 +62,7 @@ public enum PubSubType {
 	 * Listening live stream with view counter in specific channel name
 	 * <code>subject(&lt;channel name&gt;)</code>
 	 */
-	@Unofficial
+	@Unofficial("https://discuss.dev.twitch.tv/t/pubsub-video-playback/9020")
 	VIDEO_PLAYBACK("video-playback");
 
 	private final String topic;

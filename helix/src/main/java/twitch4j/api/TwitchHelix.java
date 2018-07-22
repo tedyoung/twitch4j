@@ -1,18 +1,28 @@
 package twitch4j.api;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import twitch4j.Configuration;
 import twitch4j.api.helix.exceptions.ScopeIsMissingException;
 import twitch4j.api.helix.service.*;
 import twitch4j.common.auth.ICredential;
 import twitch4j.common.auth.Scope;
+import twitch4j.common.utils.CommonUtils;
 import twitch4j.stream.rest.request.Router;
 
+import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
+
+/**
+ * The <b>NEW</b> Twitch API (Helix) provides tools for developing integrations with Twitch.
+ * Using {@link twitch4j.stream.rest.request.Router Router} to provides reactive non=blocking response
+ * components using <a href="https://projectreactor.io/">Project Reactor</a>.
+ * @author Damian Staszewski [https://github.com/stachu540]
+ * @version %I%, %G%
+ * @since 1.0
+ */
 @RequiredArgsConstructor
 public class TwitchHelix {
 	/**
@@ -22,6 +32,7 @@ public class TwitchHelix {
 
 	/**
 	 * Initialize the TwitchHelix Endpoints
+	 * @param configuration configuration
 	 */
 	public TwitchHelix(Configuration configuration) {
 		Map<String, String> headers = new LinkedHashMap<>();
@@ -35,13 +46,14 @@ public class TwitchHelix {
 		headers.put("Client-ID", configuration.getClientId());
 
 		// create router instance
-		router = configuration.buildRouter("https://api.twitch.tv/helix", headers);
+		router = CommonUtils.buildRouter("https://api.twitch.tv/helix", headers);
 	}
 
 	/**
 	 * The Bits Service
 	 *
 	 * Required Permissions: {@link twitch4j.common.auth.Scope#BITS_READ}
+	 * @param credential
 	 * @return A new instance of the BitsService
 	 */
 	public BitsService getBitsLeaderboad(ICredential credential) {
@@ -64,6 +76,7 @@ public class TwitchHelix {
 	 * The ClipsCreation Service
 	 *
 	 * Required Permissions: {@link twitch4j.common.auth.Scope#CLIPS_EDIT}
+	 * @param credential
 	 * @return A new instance of the ClipsCreationService
 	 */
 	public ClipsCreationService createClip(ICredential credential) {
@@ -106,17 +119,18 @@ public class TwitchHelix {
 	 * @return A new instance of the UsersService
 	 */
 	public UsersService getUsersService() {
-		return new UsersService(router, Optional.empty());
+		return getUsersService(null);
 	}
 
 	/**
 	 * The Users Service
 	 *
 	 * Required Permissions: {@link twitch4j.common.auth.Scope#USER_READ}
+	 * @param credential
 	 * @return A new instance of the UsersService
 	 */
-	public UsersService getUsersService(ICredential credential) {
-		if (!credential.scopes().contains(Scope.USER_READ)) {
+	public UsersService getUsersService(@Nullable ICredential credential) {
+		if (credential != null && !credential.scopes().contains(Scope.USER_READ)) {
 			throw new ScopeIsMissingException(Scope.USER_READ);
 		}
 		return new UsersService(router, Optional.ofNullable(credential));

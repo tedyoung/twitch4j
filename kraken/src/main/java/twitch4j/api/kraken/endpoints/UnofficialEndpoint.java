@@ -9,7 +9,6 @@ import twitch4j.api.kraken.model.unofficial.Ember;
 import twitch4j.common.utils.Unofficial;
 
 @Slf4j
-@Unofficial
 public class UnofficialEndpoint extends AbstractTwitchEndpoint {
 
 	/**
@@ -28,7 +27,7 @@ public class UnofficialEndpoint extends AbstractTwitchEndpoint {
 	 * @param userName Twitch username
 	 * @return todo
 	 */
-	@Unofficial
+	@Unofficial("") // TODO: Required Source
 	public Ember getEmber(String userName) {
 		// Endpoint
 		String requestUrl = String.format("/channels/%s/ember", userName);
@@ -50,7 +49,7 @@ public class UnofficialEndpoint extends AbstractTwitchEndpoint {
 	 * @param userName Twitch username
 	 * @return todo
 	 */
-	@Unofficial
+	@Unofficial("https://discuss.dev.twitch.tv/t/get-linked-steam-account-of-user/1659")
 	public String getConnectedSteamProfile(String userName) {
 		// Endpoint
 		String requestUrl = String.format("/channels/%s", userName);
