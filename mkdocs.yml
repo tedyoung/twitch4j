@@ -1,0 +1,5 @@
+site_name: Twitch4J
+repo_url: https://github.com/twitch4j/twitch4j
+pages:
+    - Home: index.md
+theme: readthedocs
