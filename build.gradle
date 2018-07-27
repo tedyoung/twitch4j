@@ -6,9 +6,13 @@ plugins {
 	id 'net.ltgt.apt-idea' version '0.17'
 	id 'com.jfrog.bintray' version '1.8.4'
 	id 'net.ltgt.apt-eclipse' version '0.17'
+	id 'com.jfrog.artifactory' version '4.7.5'
+	id "de.lukaskoerfer.gradle.delombok" version "0.2"
 	id "com.gorylenko.gradle-git-properties" version '1.5.1'
 	id 'io.spring.dependency-management' version '1.0.5.RELEASE'
 }
+
+apply from: "${rootDir}/gradle/javadoc.gradle"
 
 allprojects {
 	apply plugin: 'net.ltgt.apt'
@@ -97,8 +101,8 @@ subprojects {
 
 	sourceCompatibility = targetCompatibility = 1.8
 
-	apply from: "${rootDir}/test.gradle"
-	apply from: "${rootDir}/deploy.gradle"
+	apply from: "${rootDir}/gradle/test.gradle"
+	apply from: "${rootDir}/gradle/deploy.gradle"
 
 	// Dependencies
 	dependencies {
@@ -145,6 +149,6 @@ subprojects {
 }
 
 wrapper {
-	gradleVersion = "4.8" // newer version
+	gradleVersion = "4.8.1" // newer version
 	distributionType = Wrapper.DistributionType.ALL // distribution type ALL
 }
