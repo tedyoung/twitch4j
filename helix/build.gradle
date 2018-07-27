@@ -3,10 +3,4 @@ dependencies {
 	 * Common Dependencies
 	 */
 	compile project(":common")
-
-	/**
-	 * HTTP Client
-	 */
-	compile group: 'io.projectreactor.ipc', name: 'reactor-netty'
-	compile group: 'io.projectreactor.addons', name: 'reactor-extra'
 }
