@@ -27,7 +27,7 @@ build:
   artifacts:
     paths:
     - ./**/build/libs/*.jar
-	- ./build/libs/*.jar
+    - ./build/libs/*.jar
     expire_in: 1 week
 
 api-helix:
