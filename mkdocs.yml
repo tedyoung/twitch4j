@@ -1,6 +1,13 @@
 site_name: Twitch4J
 repo_url: https://github.com/twitch4j/twitch4j
-pages:
-    - Home: index.md
 theme: readthedocs
 docs_dir: docs
+pages:
+- Overview: 'index.md'
+- Getting Started:
+    - 'TwitchClient': 'getting-started/twitch-client.md'
+- For Contributors:
+    - 'Overview & Collobaration': 'contributors/overview.md'
+    - 'Setting up your IDE': 'contributors/ide.md'
+    - 'Conventions': 'contributors/conventions.md'
+- Changelog & Migration: 'changelog/overview.md'
