@@ -1,0 +1,44 @@
+task aggregatedJavadocs(type: Javadoc,
+    description: "Generate javadocs from all child projects as if it was a single project",
+    group: "Documentation"
+){
+    String projectVersion = (version.toString().endsWith("-SNAPSHOT")) ?
+            "Develop" : version
+
+	def destination = file("${rootProject.buildDir}/docs/javadoc/${projectVersion.toLowerCase()}")
+
+	doFirst {
+		// replace existing directory
+		if (destination.exists()) {
+			destination.deleteDir()
+		}
+	}
+
+    destinationDir destination
+    failOnError false
+
+    options {
+        title = "$rootProject.name ${rootProject.version} API"
+        overview = file("${rootDir}/gradle/javadoc/overview.html")
+        stylesheetFile = file("${rootDir}/gradle/javadoc/style.css")
+        encoding = "UTF-8"
+        windowTitle = "$rootProject.name ($version)"
+        author true
+        addStringOption "Xdoclint:none", "-quiet"
+		// adding links to javadocs for filling specific classes when not existing inside current javadoc
+        links = [
+            "http://projectreactor.io/docs/core/release/api/",
+            "http://projectreactor.io/docs/netty/release/api/",
+            "http://projectreactor.io/docs/extra/release/api/"
+        ]
+    }
+
+    subprojects.each { project ->
+        project.tasks.withType(Javadoc.class).each { doc ->
+            source += doc.source
+            classpath += doc.classpath
+            excludes += doc.excludes
+            includes += doc.includes
+        }
+    }
+}

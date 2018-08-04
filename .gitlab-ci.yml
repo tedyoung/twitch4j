@@ -1,33 +1,75 @@
-####
-# GitLab CI
-####
-
 # Image
 image: openjdk:8-jdk-alpine
-
-# Before Script
-before_script:
-  # Make gradle wrapper executable
-  - chmod +x gradlew
-  - chmod +x gradle/wrapper/gradle-wrapper.jar
-  - apk --no-cache add git
 
 # Stages
 stages:
   - build
-  - publish
+  - test
+  - deploy
+
+# Before Script
+before_script:
+# Make gradle wrapper executable
+  - chmod +x gradlew
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+  - apk --no-cache add git
+
+cache:
+  paths:
+  - .gradle/wrapper
+  - .gradle/caches
 
 # Build
-Assemble:
+build:
   stage: build
   script:
-  - ./gradlew assemble
+    - ./gradlew assemble -x test
+  artifacts:
+    paths:
+    - ./**/build/libs/*.jar
+    - ./build/libs/*.jar
+    expire_in: 1 week
 
-# Publish
-Publish:
-  stage: publish
+api-helix:
+  stage: test
   script:
-  - ./gradlew bintrayUpload
+    - ./gradlew helix:check
+  allow_failure: true # adding them because there is no test exist
+
+api-kraken:
+  stage: test
+  script:
+    - ./gradlew kraken:check
+  allow_failure: true # adding them because there is no test exist
+
+chat:
+  stage: test
+  script:
+    - ./gradlew irc:check
+  allow_failure: true # adding them because there is no test exist
+
+pubsub:
+  stage: test
+  script:
+    - ./gradlew pubsub:check
+  allow_failure: true # adding them because there is no test exist
+
+# deploy release only tags creating (marking master if release will be only master - not release/v1 like)
+release_deploy:
+  stage: deploy
+  script:
+    - ./gradlew bintrayPublish
   only:
-  - master
-  - /^v[0-9]+\.[0-9]+\.[0-9]+$/
+#    - master
+    - /^v[0-9]+\.[0-9]+\.[0-9]+$/
+  when: on_success # all builds has been passed - will deploy
+
+snapshot_deploy:
+  stage: deploy
+  script:
+    - ./gradlew artifactoryPublish
+  when: on_success # all builds has been passed - will deploy
+
+# TODO: Deploy javadoc to separate repository
+#after_script:
+#  - ./javadocDeploy.sh
